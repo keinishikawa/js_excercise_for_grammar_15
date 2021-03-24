@@ -17,12 +17,43 @@
 //       - タイマーの名前と現在の_remainingSecondsの値をconsole.logで出力する
 //     - _isRunningがfalse、もしくは_remainingSeconds以下のときは何もしない
 
+class KitchenTimer{
+    constructor(_name,_remainingSeconds=0,_isRunning=false){
+        this._name = _name;
+        this._remainingSeconds = _remainingSeconds;
+        this._isRunning = _isRunning;
+        window.setInterval(()=>{
+            if(this._isRunning === true && this._remainingSeconds>0){
+                this._remainingSeconds-=1;
+                console.log("timername:"+this._name+",残り時間:"+this._remainingSeconds);
+            }
+        },1000);
+    }
+
+    setSeconds(remainingSeconds){
+        this._remainingSeconds = remainingSeconds;
+    }
+
+    start(){
+        this._isRunning = true;
+    }
+    stop(){
+        this._isRunning = false;
+    }
+}
+
+const timer1 = new KitchenTimer("タイマー1",3);
+console.log(timer1);
+
+
 
 
 // 課題2: KitchenTimerクラスのインスタンスを2つ生成して、それぞれのインスタンスの_remainingSecondsにメソッド経由で3秒と5秒をセットする
 // - 変数名はtimer1, timer2として、コンストラクタ経由でセットする名前はそれぞれ `タイマー1`、`タイマー2`とする
-
+const timer2 = new KitchenTimer("タイマー2",5);
 
 
 // 課題3: 課題2で生成したインスタンスのstartメソッドを実行する
 // - window.setInterval内に実装したconsole.logで「'タイマーの名前 : 残り時間〇秒'」のように表示されるのを確認する
+timer1.start();
+timer2.start();
